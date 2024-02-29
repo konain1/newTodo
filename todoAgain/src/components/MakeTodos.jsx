@@ -3,8 +3,8 @@ import { useState } from "react"
 export function MakeTodos () {
 
   
-  const [title,setTitle] = useState("")
-  const [description,setDescription] = useState("")
+  // const [title,setTitle] = useState("")
+  // const [description,setDescription] = useState("")
 
 
   function handlerMakedTodo(){
@@ -12,8 +12,8 @@ export function MakeTodos () {
     fetch('http://localhost:3000/make',{
       method:"POST",
         body:JSON.stringify({
-          title:title,
-          description:description
+          title:document.getElementById('title').value,
+          description:document.getElementById('description').value
         }),
         headers:{
           "content-type":"application/json"
