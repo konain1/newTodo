@@ -1,24 +1,54 @@
+import { useState } from "react"
+
 export function MakeTodos () {
 
+  
+  const [title,setTitle] = useState("")
+  const [description,setDescription] = useState("")
+
+
   function handlerMakedTodo(){
-    alert('running')
+
+    fetch('http://localhost:3000/make',{
+      method:"POST",
+        body:JSON.stringify({
+          title:title,
+          description:description
+        }),
+        headers:{
+          "content-type":"application/json"
+        }
+    }).then(async(data)=>{
+      let datas = await data.json()
+      alert('todo added')
+      
+    })
+
+    console.log(title)
   }
+  
   return (
     <>
       <div className='container'>
-        <form action='' method='POST'>
+        
           <label>Title</label>
           
-          <input type='text' name='title' placeholder='title'></input>
+          <input type='text' name='title' id="title" placeholder='title' onChange={(e)=>{
+            setTitle(e.target.value)
+          }}></input>
         
           <input
             type='text'
             name='description'
+            id="description"
             placeholder='description'
+            onChange={(e)=>{
+            setDescription(e.target.value)
+          }}
           ></input>
         
           <button type='submit' onClick={handlerMakedTodo} >todo Added</button>
-        </form>
+       
       </div>
     </>
   )
